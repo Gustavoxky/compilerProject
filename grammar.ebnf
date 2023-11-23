@@ -1,0 +1,79 @@
+<program>            ::= <statement> (";" <statement>)*
+
+<statement>          ::= <declaration>
+                    |   <if_statement>
+                    |   <while_loop>
+                    |   <for_loop>
+                    |   <function_definition>
+                    |   <expression>
+
+<declaration>        ::= "var" <variable> (":" <type>)? ("=" <expression>)?
+                    |   "var" <variable> "[" <expression> "]" (":" <type>)? "=" "{" <expression_list>? "}"
+
+<expression>         ::= <logical_or_expression>
+
+<logical_or_expression> ::= <logical_and_expression> ("or" <logical_and_expression>)*
+
+<logical_and_expression> ::= <equality_expression> ("and" <equality_expression>)*
+
+<equality_expression> ::= <relational_expression> (("==" | "!=") <relational_expression>)*
+
+<relational_expression> ::= <additive_expression> ("<" | ">" | "<=" | ">=" <additive_expression>)*
+
+<additive_expression> ::= <multiplicative_expression> (("+" | "-") <multiplicative_expression>)*
+
+<multiplicative_expression> ::= <unary_expression>  (("*" | "/" | "%") <unary_expression>)*
+
+<unary_expression>    ::= <unary_operator>? <primary_expression>
+
+<unary_operator>     ::= "+" | "-" | "not" | "++" | "--" | "!" | "~"
+
+<primary_expression> ::= <number>
+                    |   <variable>
+                    |   <string>
+                    |   <function_call>
+                    |   "(" <expression> ")"
+                    |   "[" <expression_list> "]"
+                    |   <ternary_expression>
+
+<ternary_expression>  ::= <expression> "?" <expression> ":" <expression>
+
+<expression_list>    ::= <expression> ("," <expression>)*
+
+<function_call>      ::= <identifier> "(" <argument_list>? ")"
+
+<argument_list>      ::= <expression> ("," <expression>)*
+
+<if_statement>       ::= "if" <expression> "then" <block> ("else" <block>)?
+
+<while_loop>         ::= "while" <expression> "do" <block>
+
+<for_loop>           ::= "for" <for_initializer>? ";" <for_condition>? ";" <for_iterator>? "do" <block>
+
+<for_initializer>    ::= <declaration> | <expression>
+
+<for_condition>      ::= <expression>
+
+<for_iterator>       ::= <expression>
+
+<block>              ::= "{" (<statement> (";" <statement>)*)? "}"
+
+<function_definition> ::= "function" <identifier> "(" <parameter_list>? ")" <block>
+
+<parameter_list>     ::= <parameter> ("," <parameter>)*
+
+<parameter>          ::= <variable> (":" <type>)?
+
+<type>              ::= "int" | "float" | "bool" | "string" | <custom_type>
+
+<custom_type>        ::= <identifier>
+
+<variable>           ::= <identifier>
+
+<string>            ::= "\"" <char>* "\""
+
+<char>              ::= [a-zA-Z0-9\s!@#$%^&*()-+=<>?.,;:'"/]
+
+<identifier>         ::= [a-zA-Z][a-zA-Z0-9]*
+
+<number>            ::= [0-9]+
