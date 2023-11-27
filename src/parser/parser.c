@@ -1,29 +1,39 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-
-// Definição de tipos de token
-typedef enum {
-    NUM,
-    OP_ADD,
-    OP_SUB,
-    OP_MUL,
-    OP_DIV,
-    LPAREN,
-    RPAREN,
-    END,
-    ERROR
-} TokenType;
-
-// Estrutura para armazenar tokens
-typedef struct {
-    TokenType type;
-    int value; // Apenas usado se o tipo for NUM
-} Token;
+#include "../../include/parser.h"
 
 // Função para imprimir tokens
 void printToken(Token token) {
-    // Implementação da função printToken...
+    switch (token.type) {
+        case NUM:
+            printf("NUM: %d\n", token.value);
+            break;
+        case OP_ADD:
+            printf("OP_ADD\n");
+            break;
+        case OP_SUB:
+            printf("OP_SUB\n");
+            break;
+        case OP_MUL:
+            printf("OP_MUL\n");
+            break;
+        case OP_DIV:
+            printf("OP_DIV\n");
+            break;
+        case LPAREN:
+            printf("LPAREN\n");
+            break;
+        case RPAREN:
+            printf("RPAREN\n");
+            break;
+        case END:
+            printf("END\n");
+            break;
+        case ERROR:
+            printf("ERROR\n");
+            break;
+    }
 }
 
 // Função para verificar se um caractere é um operador

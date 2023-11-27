@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include "../../include/lexer.h"
 
 // Definindo os tipos de tokens
 enum TokenType {

@@ -1,29 +1,6 @@
-#include <stdio.h>
+#include "../../include/intermediateCode.h"
 #include <stdlib.h>
 #include <ctype.h>
-
-// Definição de tipos de token
-typedef enum {
-    NUM,
-    OP_ADD,
-    OP_SUB,
-    OP_MUL,
-    OP_DIV,
-    END,
-    ERROR
-} TokenType;
-
-// Estrutura para armazenar tokens
-typedef struct {
-    TokenType type;
-    int value; // Apenas usado se o tipo for NUM
-} Token;
-
-// Estrutura para armazenar instruções do código intermediário
-typedef struct {
-    TokenType operation;
-    int operand; // Apenas usado se a operação for NUM
-} IntermediateCode;
 
 // Função para imprimir tokens
 void printToken(Token token) {
@@ -113,26 +90,6 @@ Token getNextToken(char **expression) {
 }
 
 // Função para realizar a análise sintática e geração de código intermediário
-int generateIntermediateCode(char **expression, IntermediateCode *code);
-
-// Função principal
-int main() {
-    char expression[] = "3 + 5 - 2 * 4 / 2";
-    char *ptr = expression;
-
-    IntermediateCode intermediateCode[50]; // Um array para armazenar o código intermediário
-    int codeLength = generateIntermediateCode(&ptr, intermediateCode);
-
-    if (codeLength != -1) {
-        printIntermediateCode(intermediateCode, codeLength);
-    } else {
-        printf("Erro na expressao.\n");
-    }
-
-    return 0;
-}
-
-// Implementação da função de análise sintática e geração de código intermediário
 int generateIntermediateCode(char **expression, IntermediateCode *code) {
     int codeIndex = 0;
 
@@ -178,4 +135,20 @@ int generateIntermediateCode(char **expression, IntermediateCode *code) {
 
     // Se chegamos aqui, houve um erro na análise sintática
     return -1;
+}
+
+int main() {
+    char expression[] = "3 + 5 - 2 * 4 / 2";
+    char *ptr = expression;
+
+    IntermediateCode intermediateCode[50]; // Um array para armazenar o código intermediário
+    int codeLength = generateIntermediateCode(&ptr, intermediateCode);
+
+    if (codeLength != -1) {
+        printIntermediateCode(intermediateCode, codeLength);
+    } else {
+        printf("Erro na expressao.\n");
+    }
+
+    return 0;
 }
